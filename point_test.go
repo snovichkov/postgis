@@ -1,7 +1,6 @@
 package postgis
 
 import (
-	"encoding/hex"
 	"fmt"
 	"strings"
 	"testing"
@@ -62,13 +61,10 @@ func TestPointS_Value(t *testing.T) {
 
 	for index, testCase := range testCases {
 		t.Run(fmt.Sprintf("TestCase%d", index), func(t *testing.T) {
-			var (
-				raw, err = testCase.value.Value()
-				encoded  = hex.EncodeToString(raw.([]byte))
-			)
+			var raw, err = testCase.value.Value()
 
 			assert.EqualValues(t, testCase.error, err)
-			assert.EqualValues(t, testCase.expect, strings.ToUpper(encoded))
+			assert.EqualValues(t, testCase.expect, strings.ToUpper(raw.(string)))
 		})
 	}
 }

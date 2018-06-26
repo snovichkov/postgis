@@ -76,7 +76,9 @@ func (p PolygonS) Value() (_ driver.Value, err error) {
 		return nil, err
 	}
 
-	return buf.Bytes(), nil
+	return hex.EncodeToString(
+		buf.Bytes(),
+	), nil
 }
 
 // Scan implements the sql.Scanner interface.
